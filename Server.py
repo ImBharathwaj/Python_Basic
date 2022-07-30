@@ -1,29 +1,27 @@
 import socket
+import os
 
-host = "127.0.0.1"
-port = 5001
-# Creating a socket
+host = '127.0.0.1'
+port = 8080
 server = socket.socket()
-# Binding network attributes with it
-server.bind((host,port))
-# Make it listen
+server.bind((host, port))
 server.listen()
-
-# Bringing connection and address of the client network
 conn, addr = server.accept()
+print("Connection from: "+ str(addr))
+encode = 1024
 
-print('Connection from: '+str(addr))
+def clscr():
+    os.system('cls')
+    
 while True:
-
-    # Receiving data from collection
-    data = conn.recv(2048).decode()
+    # Encoding data from client
+    data = conn.recv(encode).decode()
+    if data == 'cls':
+        clscr()
     if not data:
         break
-    print('from connection user : '+str(data))
-
-    data = str(data).upper()
-    print('Received from user : '+str(data))
-    data = input('Type message : ')
+    print('From connected user: '+ str(data))
+    data = str(data)
+    print('Message from user : '+str(data))
+    data = input("Type message: ")
     conn.send(data.encode())
-
-conn.close()
