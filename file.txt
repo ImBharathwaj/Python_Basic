@@ -1,1 +1,2 @@
-Git rocks
+Git rocksThis is second commit
+This is second commit
