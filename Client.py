@@ -8,12 +8,16 @@ host = '127.0.0.1'
 port = 8080
 obj = socket.socket()
 obj.connect((host, port))
+encode = 1024
+
 message = input('Type message : ')
+count = 0
 while message != 'q':
-    obj.send(message.encode())
-    data = obj.recv(1024).decode()
-    if data == 'cls':
+    count = count + 1
+    if (count >= 4):
         clscr()
-    print('Received from server: '+data)
+    obj.send(message.encode())
+    data = obj.recv(encode).decode()
+    print('Received from server: ' + data)
     message = input('type message: ')
 obj.close()
