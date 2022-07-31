@@ -7,21 +7,24 @@ server = socket.socket()
 server.bind((host, port))
 server.listen()
 conn, addr = server.accept()
-print("Connection from: "+ str(addr))
+print("Connection from: " + str(addr))
 encode = 1024
+
 
 def clscr():
     os.system('cls')
-    
+
+count = 0
 while True:
     # Encoding data from client
+    count = count + 1
     data = conn.recv(encode).decode()
-    if data == 'cls':
+    if count >= 4:
         clscr()
     if not data:
         break
-    print('From connected user: '+ str(data))
+    print('From connected user: ' + str(data))
     data = str(data)
-    print('Message from user : '+str(data))
+    print('Message from user : ' + str(data))
     data = input("Type message: ")
     conn.send(data.encode())
