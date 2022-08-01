@@ -13,7 +13,6 @@ encode = 1024
 
 def clscr():
     os.system('cls')
-
 count = 0
 while True:
     # Encoding data from client
@@ -21,6 +20,7 @@ while True:
     data = conn.recv(encode).decode()
     if count >= 4:
         clscr()
+        count = 0
     if not data:
         break
     print('From connected user: ' + str(data))
